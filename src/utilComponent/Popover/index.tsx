@@ -27,20 +27,18 @@ const Musk = ({ muskController: [isMuskOpen, toggleMusk], contentNode }) =>
   ) : null;
 Musk.displayName = "Child(Musk)";
 
-declare namespace Popover {
-  type getHandler = {
-    /**
-     * 开关 musk
-     */
-    toggleMusk?: Function;
-  };
-}
+
 /**
  * 主组件
  */
 const Popover: React.FC<{
   children?: any;
-  getHandler?: Popover.getHandler;
+  getHandler?: {
+    /**
+     * 开关 musk
+     */
+    toggleMusk?: (...any: any[]) => any;
+  };
   contentNode?: React.ReactElement;
 }> = ({ getHandler, children, contentNode }) => {
   const [isMuskOpen, toggleMusk] = useToggle(false);
