@@ -1,13 +1,13 @@
-import React from "react";
-import { Popover } from "./utilComponent";
+import React from 'react'
+import { Popover } from './components'
 
 const App: React.FC = () => {
-  const popoverHandler = { toggleMusk: () => { } } as React.ComponentProps<typeof Popover>['getHandler'];
+  const popoverHandler = { musk: undefined } as React.ComponentProps<typeof Popover>['widgetHandler']
   return (
-    <Popover getHandler={popoverHandler}>
+    <Popover widgetHandler={popoverHandler}>
+      jkj
       <button className="hello">world</button>
     </Popover>
-  );
-};
-
-export default App;
+  )
+}
+export default App
