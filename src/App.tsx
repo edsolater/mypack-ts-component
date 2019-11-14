@@ -1,11 +1,11 @@
 import React from 'react'
 import { Popover } from './components'
+import { GetWidgetHandler } from 'helper/type_helper'
 
 const App: React.FC = () => {
-  const popoverHandler = { musk: undefined } as React.ComponentProps<typeof Popover>['widgetHandler']
+  const popoverHandler = { musk:undefined } as GetWidgetHandler<typeof Popover>
   return (
     <Popover widgetHandler={popoverHandler}>
-      jkj
       <button className="hello">world</button>
     </Popover>
   )

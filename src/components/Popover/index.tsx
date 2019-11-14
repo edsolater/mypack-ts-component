@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import './Popover.css'
 import { useSwitcher } from 'myHooks'
 import { SwitchObject } from 'myHooks/useSwitcher'
@@ -8,24 +8,24 @@ import { attachWidgetHandlers } from 'myComponentUtil'
  * 弹出层内容
  */
 const PopContent = ({ contentNode }) =>
-  contentNode ? <div className="PopContent">{contentNode}</div> : null
+  contentNode ? <div className="pop-content">{contentNode}</div> : null
 PopContent.displayName = 'Child(PopContent)'
 
 /**
  * Musk层
  * TODO //还是不够直观要再修复
  */
-const Musk: React.FC<{ muskSwitcher: SwitchObject; contentNode: any }> = ({
-  muskSwitcher,
+const Musk: React.FC<{ muskHandler: SwitchObject; contentNode?: ReactElement }> = ({
+  muskHandler,
   contentNode
 }) => {
   //TOFIX
-  return muskSwitcher.state ? (
+  return muskHandler.state ? (
     <div
-      className="Musk"
+      className="musk"
       onClick={e => {
         e.stopPropagation()
-        muskSwitcher.toggle()
+        muskHandler.toggle()
       }}
     >
       <PopContent contentNode={contentNode} />
@@ -40,26 +40,26 @@ Musk.displayName = 'Child(Musk)'
 const Popover: React.FC<{
   widgetHandler?: {
     /**
-     * 控制musk开关
+     * musk的开关行为
      */
     musk?: SwitchObject
   }
   /**
    * 需要Popover的内容
    */
-  contentNode?: React.ReactElement
+  contentNode?: ReactElement
 }> = ({ widgetHandler, contentNode, children }) => {
-  const muskSwitcher = useSwitcher(false)
-  attachWidgetHandlers(widgetHandler, { musk: muskSwitcher })
+  const muskHandler = useSwitcher(false)
+  attachWidgetHandlers(widgetHandler, { musk: muskHandler })
   return (
     <div
-      className="Popover"
+      className="popover"
       onClick={() => {
-        muskSwitcher.toggle()
+        muskHandler.toggle()
       }}
     >
       {children}
-      <Musk muskSwitcher={muskSwitcher} contentNode={contentNode} />
+      <Musk muskHandler={muskHandler} contentNode={contentNode} />
     </div>
   )
 }
